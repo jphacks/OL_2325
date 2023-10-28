@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サインインフォーム</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5"> <!-- mt-5: margin top 5 -->
+    <div class="row justify-content-center">  <!-- justify-content-center: 中央寄せ -->
+      <div class="col-md-6">  <!-- col-md-6: 6カラム -->
+        <div class="card">  <!-- card: カードを作る -->
+          <div class="card-header"> <!-- card-header: カードのヘッダー -->
+            サインイン
+          </div>
+          <div class="card-body"> <!-- card-body: カードのボディー -->
+            <form>
+              <div class="form-group">  <!-- form-group: フォームのグループ -->
+                <label for="email">メールアドレス</label>
+                <input type="email" class="form-control" id="email" placeholder="メールアドレスを入力してください">
+              </div>
+              <div class="form-group">  <!-- form-group: フォームのグループ -->
+                <label for="password">パスワード</label>
+                <input type="password" class="form-control" id="password" placeholder="パスワード">
+              </div>
+              <button type="submit" class="btn btn-success">ログイン</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (Optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
