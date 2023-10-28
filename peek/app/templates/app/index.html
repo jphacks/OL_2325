@@ -2,13 +2,13 @@
 
 {%block title%}peek{%endblock%}
 {%block header%}
-<h2>header</h2>
+<h2>Home</h2>
 {%endblock%}
 
 {%block content%}
 
 {% if user.is_authenticated %}
-<li>  <a class="nav-link">ユーザ名：{{ user.get_username }}</a></li>
+<li>  <a class="nav-link">ログイン中：{{ user.get_username }}</a></li>
 <li>
     <a class="nav-link" href="">
         <a class="nav-link" href="{% url 'logout' %}">
@@ -17,10 +17,13 @@
 {% endif %}
 {%for item in contents%}
 <hr>
-<p class="message_owner">{{item.author}} さん</p>
+<p class="message_owner"><a href="{% url 'profile' item.author.id %}">{{item.author}}</a> さん</p>
 <p class="message image"><img src="{{item.img.url}}" style="width: 10%; height: 10%;"></p>
 <p class="message content">{{item.body}}</p>
 <p class="message_date">({{item.created_at}})</p>
-<span class="message_counter"></span>
+<a href="{% url 'message' item.id %}"><button>詳細</button></a>
+<span class="message_counter">
+    <a href="{% url 'favorite' item.id %}"><button>いいね</button></a>{{item.favorite_count}}
+</span>
 {%endfor%}
 {%endblock%}

@@ -24,7 +24,7 @@
             </td></tr>
             {% if user.is_authenticated %}
             <tr><th width="150px">login user:</th>
-            <td>{{login_user}}</td></tr>
+            <td><a href="{%url 'profile' user.id%}">{{login_user}}</a></td></tr>
             {% endif %}
         </table>
         <div class="header">{%block header%}

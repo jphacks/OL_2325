@@ -13,6 +13,7 @@ class Post(models.Model):
     img = models.ImageField(upload_to="", blank=False, null=False)
     score = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    favorite_count = models.IntegerField(default=0)
     def __str__(self):
         return self.title
     

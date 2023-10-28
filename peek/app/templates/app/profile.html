@@ -1,0 +1,20 @@
+{% extends 'app/layout.html'%}
+
+{%block title%}peek{%endblock%}
+{%block header%}
+<h2>Profile</h2>
+{%endblock%}
+
+{%block content%}
+
+<p>{{user.username}} さんのプロフィール</p>  
+{%for item in contents%}
+<hr>
+<p class="message_date">{{item.created_at}}</p>
+<p class="message image"><img src="{{item.img.url}}" style="width: 10%; height: 10%;"></p>
+<p class="message content">{{item.body}}</p>
+<span class="message_counter">
+    <a href="{% url 'favorite' item.id %}"><button>いいね</button></a>{{item.favorite_count}}
+</span>
+{%endfor%}
+{%endblock%}

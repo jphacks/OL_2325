@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -20,7 +19,17 @@ from django.db.models import Q
 # Create your views here.
 
 def index(request):
-    msgs =get_your_message(request.user,None)
+
+    #検索で得た場合
+    if request.method == 'POST':
+        users=request.POST['users']
+        ulist = []
+        for user in users:
+            ulist.append(user)
+        find =request.POST['find']
+        msgs =get_user_message(ulist,None)
+    else:
+        msgs=get_message()
     params = {
         'login_user':request.user,
         'contents':msgs
@@ -76,17 +85,64 @@ def post(request):
     }
     return render(request, 'app/postimg.html',params)
 
-# def message(request,msg_id):
-#     params = {
+def favorite(request, favorite_id):
+    favo_msg = Post.objects.get(id=favorite_id)
+    is_favo = Favorite.objects.filter(user=request.user).filter(post=favo_msg).count()
+    #いいねが既についていたら外す、ついていなければつける
+    if is_favo>=1:
+        # messages.success(request='既にメッセージはGoodしています。')
+        defavo = Favorite.objects.filter(user=request.user).filter(post=favo_msg).first()
+        defavo.delete()
+        favo_msg.favorite_count -= 1
+    else:
+        favorite = Favorite()
+        favorite.user =request.user
+        favorite.post =favo_msg
+        favorite.save()  
+        favo_msg.favorite_count += 1
+        # messages.success(request,'メッセージにgoodしました！')
+    favo_msg.save()
 
-#     }
-#     return render(request,'sns/message.html',params)
 
-def get_your_message(owner,find):
-    #TODO:ownerのfollowerに限るフィルタを追加する
+    return redirect (to=request.META['HTTP_REFERER'])
+
+@login_required(login_url='/login/')
+def profile(request,user_id):
+    user =get_object_or_404(User,id=user_id)
+    msgs=get_user_message([user],None)
+    params = {
+        'login_user':request.user,
+        'contents':msgs,
+        'user':user
+    }
+    return render(request,'app/profile.html',params)
+
+def message(request,msg_id):
+    msg=Post.objects.filter(id=msg_id).first()
+    if request.method =='POST' and request.POST['mode'] ==  '__delete_form__':
+        print('delete')
+        msg.img.delete()
+        msg.delete()
+        return redirect(to='/')
+    
+    favo_count =Favorite.objects.filter(post=msg).count
+
+    params = {
+        'login_user':request.user,
+        'message':msg,
+        'favorites':favo_count
+    }
+    return render(request,'app/message.html',params)
+
+def get_user_message(users,find):
+    #TODO:usersに限るフィルタを追加する->した
+    #すべてを取得するのに別に'get_message()'を使用
 
     if find == None:
-        msgs = Post.objects.all()[:100]
+        msgs = Post.objects.filter(author__in=users)[:100]
     else:
-        msgs = Post.objects.filter(body__contains=find)[:100]
+        msgs = Post.objects.filter(author__in=users).filter(body__contains=find)[:100]
     return msgs
+
+def get_message():
+    return Post.objects.all()[:100]
