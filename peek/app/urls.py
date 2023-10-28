@@ -7,6 +7,8 @@ urlpatterns = [
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
     path('post',views.post,name='post'),
+    path('favorite/<int:favorite_id>',views.favorite,name='favorite'),
+    path('profile/<int:user_id>',views.profile, name='profile')
     # path('message/<id:msg_id>',views.message, name='message'),
 
 ]
