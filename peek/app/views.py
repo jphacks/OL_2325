@@ -74,7 +74,7 @@ def post(request):
         'login_user':request.user,
         'form':form,
     }
-    return render(request, 'app/post.html',params)
+    return render(request, 'app/postimg.html',params)
 
 # def message(request,msg_id):
 #     params = {
