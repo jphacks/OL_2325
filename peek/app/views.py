@@ -103,7 +103,8 @@ def favorite(request, favorite_id):
         # messages.success(request,'メッセージにgoodしました！')
     favo_msg.save()
 
-    return redirect (to='/')
+
+    return redirect (to=request.META['HTTP_REFERER'])
 
 @login_required(login_url='/login/')
 def profile(request,user_id):
