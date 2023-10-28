@@ -10,7 +10,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_author")
     title = models.CharField(max_length=255)
     body = models.TextField(max_length=1000)
-    img = models.ImageField(upload_to="post_images", blank=False, null=False)
+    img = models.ImageField(upload_to="", blank=False, null=False)
     score = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
