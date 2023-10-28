@@ -6,4 +6,4 @@ pip install -r requirements.txt
 
 python peek/manage.py collectstatic --no-input
 python peek/manage.py migrate
-python peek/manage.py newsuperuser
+python peek/manage.py superuser
