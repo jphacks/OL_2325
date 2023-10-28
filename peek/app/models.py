@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+from django.db import models
+from django.contrib.auth.models import (BaseUserManager,AbstractBaseUser,PermissionsMixin)
+from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_author")
@@ -19,9 +24,11 @@ class Comment(models.Model):
     def __str__(self):
         return self.body
     
-class favorite(models.Model):
+class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_favorite")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_favorite")
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.user.username + " likes " + self.post.title
+    
+
