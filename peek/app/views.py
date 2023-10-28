@@ -86,6 +86,7 @@ def post(request):
     }
     return render(request, 'app/postimg.html',params)
 
+@login_required(login_url='/login/')
 def favorite(request, favorite_id):
     favo_msg = Post.objects.get(id=favorite_id)
     is_favo = Favorite.objects.filter(user=request.user).filter(post=favo_msg).count()
@@ -107,7 +108,7 @@ def favorite(request, favorite_id):
 
     return redirect (to=request.META['HTTP_REFERER'])
 
-@login_required(login_url='/login/')
+
 def profile(request,user_id):
     user =get_object_or_404(User,id=user_id)
     msgs=get_user_message([user],None)
