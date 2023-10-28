@@ -1,11 +1,9 @@
-{% load static %}
 <!doctype html>
 <html lang="ja" data-bs-theme="auto">
 
 <head>
-    
     <script src="../assets/js/color-modes.js"></script>
-    <script src="../static/js/post.js"></script> <!-- カメラを動かすjsを追加 -->
+    <script src="cam.js"></script> <!-- カメラを動かすjsを追加 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -91,20 +89,33 @@
         .bd-mode-toggle {
             z-index: 1500;
         }
+
+        .fixed-bottom-right {
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            font-size: 25px;
+        }
     </style>
 
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/homeview.css" rel="stylesheet">
+    <link href="homeview.css" rel="stylesheet">
 </head>
 
 <body>
-
+    <!-- contents -->
     <!-- Bootstrap Modalのトリガーボタン -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+    <button type="button" class="btn btn-primary  fixed-bottom-right" data-bs-toggle="modal" data-bs-target="#myModal"
         onclick="cameraInitSmartphoneSupport()">
-        モーダルを開く
+        <i class="fa-solid fa-plus"></i>
+        <i class="fa-solid fa-camera"></i>
     </button>
+
+
 
     <!-- Bootstrap Modal本体 -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -115,15 +126,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- カメラ起動ボタンと撮影ボタンを追加 -->
-                    <!-- <input type="button" value="カメラ起動" onclick="cameraInitSmartphoneSupport()"> -->
-                    <input type="button" value="撮影" onclick="shoot()">
                     <div>
                         <!-- カメラ映像を表示するvideo要素 -->
                         <video id="camera" autoplay muted playsinline></video>
                         <!-- カメラの映像を描画するcanvas要素 -->
                         <canvas id="canvas" wcrossorigin="anonymous"></canvas>
                     </div>
+                    <!-- カメラ起動ボタンと撮影ボタンを追加 -->
+                    <input type="button" value="カメラ起動" onclick="cameraInitSmartphoneSupport()">
+                    <input type="button" value="撮影" onclick="shoot()">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
@@ -134,6 +145,11 @@
     </div>
 
 
+
+    </div>
+    </div>
+
+    </div>
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
