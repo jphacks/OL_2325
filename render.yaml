@@ -14,7 +14,7 @@ services:
     branch: main
     healthCheckPath: /
     buildCommand: "./build.sh"
-    startCommand: "gunicorn OL_2325.wsgi --log-file -"
+    startCommand: "gunicorn peek/peek.wsgi --log-file -"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
