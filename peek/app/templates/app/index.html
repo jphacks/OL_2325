@@ -1,21 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    top
-    <a href="#">login</a>
-    {% if user.is_authenticated %}
-    <li>  <a class="nav-link">ユーザ名：{{ user.get_username }}</a></li>
-    <li>
-        <a class="nav-link" href="">
-            <a class="nav-link" href="{% url 'accounts:logout' %}">
-            <i class="fa fa-fw fa-sign-out"></i>ログアウト</a>
-    </li>
-    {% endif %}
-</body>
-</html>
+{% extends 'app/layout.html'%}
+
+{%block title%}peek{%endblock%}
+{%block header%}
+<h2>header</h2>
+{%endblock%}
+
+{%block content%}
+
+{% if user.is_authenticated %}
+<li>  <a class="nav-link">ユーザ名：{{ user.get_username }}</a></li>
+<li>
+    <a class="nav-link" href="">
+        <a class="nav-link" href="{% url 'logout' %}">
+        <i class="fa fa-fw fa-sign-out"></i>ログアウト</a>
+</li>
+{% endif %}
+{%for item in contents%}
+<hr>
+<p class="message_owner">{{item.author}} さん</p>
+<p class="message image"><img src="{{item.img.url}}" style="width: 10%; height: 10%;"></p>
+<p class="message content">{{item.body}}</p>
+<p class="message_date">({{item.created_at}})</p>
+<span class="message_counter"></span>
+{%endfor%}
+{%endblock%}

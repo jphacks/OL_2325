@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -20,3 +21,9 @@ class SignUpForm(UserCreationForm):
             "email",
         )
 
+class PostForm(forms.Form):
+    title = forms.CharField(max_length=50, required=False)
+    image = forms.ImageField(required=True)
+    body = forms.CharField(max_length=500,widget=forms.Textarea, required=False)
+    def __init__(self, user, *args, **kwargs):
+        super(PostForm,self).__init__(*args, **kwargs)
