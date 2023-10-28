@@ -21,6 +21,7 @@
 <p class="message image"><img src="{{item.img.url}}" style="width: 10%; height: 10%;"></p>
 <p class="message content">{{item.body}}</p>
 <p class="message_date">({{item.created_at}})</p>
+<a href="{% url 'message' item.id %}"><button>詳細</button></a>
 <span class="message_counter">
     <a href="{% url 'favorite' item.id %}"><button>いいね</button></a>{{item.favorite_count}}
 </span>

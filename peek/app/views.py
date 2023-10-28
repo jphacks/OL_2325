@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -108,7 +107,7 @@ def favorite(request, favorite_id):
 
 @login_required(login_url='/login/')
 def profile(request,user_id):
-    user =User.objects.filter(id=user_id).first()
+    user =get_object_or_404(User,id=user_id)
     msgs=get_user_message([user],None)
     params = {
         'login_user':request.user,
@@ -117,11 +116,22 @@ def profile(request,user_id):
     }
     return render(request,'app/profile.html',params)
 
-# def message(request,msg_id):
-#     params = {
+def message(request,msg_id):
+    msg=Post.objects.filter(id=msg_id).first()
+    if request.method =='POST' and request.POST['mode'] ==  '__delete_form__':
+        print('delete')
+        msg.img.delete()
+        msg.delete()
+        return redirect(to='/')
+    
+    favo_count =Favorite.objects.filter(post=msg).count
 
-#     }
-#     return render(request,'sns/message.html',params)
+    params = {
+        'login_user':request.user,
+        'message':msg,
+        'favorites':favo_count
+    }
+    return render(request,'app/message.html',params)
 
 def get_user_message(users,find):
     #TODO:usersに限るフィルタを追加する->した

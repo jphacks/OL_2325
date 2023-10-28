@@ -1,0 +1,24 @@
+{% extends 'app/layout.html'%}
+
+{%block title%}peek{%endblock%}
+{%block header%}
+<h2>Message</h2>
+{%endblock%}
+
+{%block content%}
+<hr>
+<p class="message_owner"><a href="{% url 'profile' message.author.id %}">{{message.author}}</a> さん</p>
+<p class="message image"><img src="{{message.img.url}}" style="width: 50%; height: 50%;"></p>
+<p class="message content">{{message.body}}</p>
+<p class="message_date">({{message.created_at}})</p>
+<span class="message_counter">
+    <a href="{% url 'favorite' message.id %}"><button>いいね</button></a>{{favorites}}
+</span>
+{%if message.author == login_user%}
+<form action="{%url 'message' message.id%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="mode" value="__delete_form__">
+    <button>削除</button>
+</form>
+{%endif%}
+{%endblock%}
