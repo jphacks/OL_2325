@@ -25,5 +25,6 @@
 <span class="message_counter">
     <a href="{% url 'favorite' item.id %}"><button>いいね</button></a>{{item.favorite_count}}
 </span>
+<p class="message_score" style="color: red;">{{item.score}}</p>
 {%endfor%}
 {%endblock%}

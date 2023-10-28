@@ -14,7 +14,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from django.db.models import Q
 
-
+import random
 
 # Create your views here.
 
@@ -72,6 +72,7 @@ def post(request):
         msg.title = title
         msg.body = body
         msg.img = image
+        msg.score = random.randint(0, 100)
         msg.save()
         # messages.success(request, '新しいメッセージを投稿しました！')
         return redirect(to='/')
