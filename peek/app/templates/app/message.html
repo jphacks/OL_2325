@@ -11,9 +11,16 @@
 <p class="message image"><img src="{{message.img.url}}" style="width: 50%; height: 50%;"></p>
 <p class="message content">{{message.body}}</p>
 <p class="message_date">({{message.created_at}})</p>
+<p class="message_score">{{message.score}}</p>
 <span class="message_counter">
     <a href="{% url 'favorite' message.id %}"><button>いいね</button></a>{{favorites}}
 </span>
+<form action="{%url 'comment' message.id%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="mode" value="__comment_form__">
+    {{comment_form}}
+    <button>コメント</button>
+</form>
 {%if message.author == login_user%}
 <form action="{%url 'message' message.id%}" method="post">
     {% csrf_token %}
@@ -21,4 +28,9 @@
     <button>削除</button>
 </form>
 {%endif%}
+<hr>
+{% for comment in comments %}
+<p>{{comment.author}}さん：{{comment.body}}</p>
+<p>{{comment.created_at}}</p>
+{% endfor %}
 {%endblock%}

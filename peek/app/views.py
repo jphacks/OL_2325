@@ -5,7 +5,7 @@ from django.contrib import messages
 # ここから追加
 
 from .models import Post, Comment, Favorite
-from .forms import LoginForm,SignUpForm,PostForm
+from .forms import LoginForm,SignUpForm,PostForm, CommentForm
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -87,6 +87,19 @@ def post(request):
     return render(request, 'app/postimg.html',params)
 
 @login_required(login_url='/login/')
+def comment(request,msg_id):
+    msg=get_object_or_404(Post, id=msg_id)
+    if request.method =='POST':
+        comment=Comment()
+        comment.author = request.user
+        comment.post = msg
+        comment.body =request.POST['body']
+        comment.save()
+        return redirect (to=request.META['HTTP_REFERER'])
+    else:
+        return redirect (to='/message/'+str(msg_id))
+
+@login_required(login_url='/login/')
 def favorite(request, favorite_id):
     favo_msg = Post.objects.get(id=favorite_id)
     is_favo = Favorite.objects.filter(user=request.user).filter(post=favo_msg).count()
@@ -120,19 +133,22 @@ def profile(request,user_id):
     return render(request,'app/profile.html',params)
 
 def message(request,msg_id):
-    msg=Post.objects.filter(id=msg_id).first()
+    msg=get_object_or_404(Post,id=msg_id)
+    #削除処理
     if request.method =='POST' and request.POST['mode'] ==  '__delete_form__':
-        print('delete')
         msg.img.delete()
         msg.delete()
         return redirect(to='/')
-    
-    favo_count =Favorite.objects.filter(post=msg).count
-
+    #共通処理
+    favo_count =Favorite.objects.filter(post=msg).count()
+    commentform = CommentForm()
+    comments = Comment.objects.filter(post=msg)[:100]
     params = {
         'login_user':request.user,
         'message':msg,
-        'favorites':favo_count
+        'favorites':favo_count,
+        'comment_form':commentform,
+        'comments':comments,
     }
     return render(request,'app/message.html',params)
 
