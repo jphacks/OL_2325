@@ -6,16 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}{%endblock%}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css'% }"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/general.css'% }"/>
 </head>
 <body>
     <div>
-        <a href="{% url 'index' %}">peek</a>
+        <!-- <a href="{% url 'index' %}" >peek</a> -->
+        <a href="{% url 'index' %}"
+            class="d-flex justify-content-center align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <!-- Logoの追加 -->
+            <img src="../static/img/Logo.png" alt="Sidebar" width="70px" height="" class="Logo">
+          </a>
     </div>
     <div class="body_content">
     <div class="body_content_inner">
         <table class="login_table" width="100%">
-            <tr><th width ="150px">menu</th><td>
+            <!-- <tr><th width ="150px">menu</th><td> -->
             <table class="login_table_inner">
             <tr>
                 <td>login</td>

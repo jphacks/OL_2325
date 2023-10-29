@@ -1,0 +1,111 @@
+
+  body {
+    margin: 0;
+  }
+  
+  
+  
+  
+  #contents {
+    display: flex;
+    max-width: 1600px;
+    /* 最大幅を設定 */
+    margin: 0 auto;
+    /* 中央に配置 */
+    /* background-color: aqua; */
+  }
+  
+  #main {
+    /* height: 2000px; */
+    flex: 3;
+    /* padding-left: 10px; */
+    /* background: yellow; */
+  }
+  
+  #sub {
+    flex: 1;
+    /* background: green; */
+  
+  }
+  
+  .box{
+    overflow: hidden; /* はみ出た部分を非表示にする */
+    text-overflow: ellipsis; /* 省略記号 (...) を表示する */
+    white-space: nowrap; /* テキストが折り返されないようにする */
+  }
+  
+  
+  #sub .box {
+    margin: 0;
+    padding: 0;
+    /* パディングを削除 */
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  
+  }
+  
+  .Logo {
+    padding: 10px;
+    width: 100%;
+  }
+  
+
+  .icon_bottom{
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+  
+  .dropdown-toggle {
+    outline: 0;
+  }
+  
+  .btn-toggle {
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: var(--bs-emphasis-coflor);
+    background-color: transparent;
+  }
+  
+  .btn-toggle:hover,
+  .btn-toggle:focus {
+    color: rgba(var(--bs-emphasis-color-rgb), .85);
+    background-color: var(--bs-tertiary-bg);
+  }
+  
+  .btn-toggle::before {
+    width: 1.25em;
+    line-height: 0;
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    transition: transform .35s ease;
+    transform-origin: .5em 50%;
+  }
+  
+  [data-bs-theme="dark"] .btn-toggle::before {
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  }
+  
+  .btn-toggle[aria-expanded="true"] {
+    color: rgba(var(--bs-emphasis-color-rgb), .85);
+  }
+  
+  .btn-toggle[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+  }
+  
+  .btn-toggle-nav a {
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+  }
+  
+  .btn-toggle-nav a:hover,
+  .btn-toggle-nav a:focus {
+    background-color: var(--bs-tertiary-bg);
+  }
+  
+  .scrollarea {
+    overflow-y: auto;
+  }

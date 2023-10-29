@@ -14,7 +14,7 @@
         <a class="nav-link" href="{% url 'logout' %}">
         <i class="fa fa-fw fa-sign-out"></i>ログアウト</a>
 </li>
-{% endif %}
+
 {%for item in contents%}
 <hr>
 <p class="message_owner"><a href="{% url 'profile' item.author.id %}">{{item.author}}</a> さん</p>
@@ -27,4 +27,25 @@
 </span>
 <p class="message_score" style="color: red;">{{item.score}}</p>
 {%endfor%}
+
+{% else %}
+
+<center>
+    <h2>ようこそPeekへ!</h2>
+    <h3>あなたのお部屋をのぞかせてください</h3>
+    <li>
+        <a class="btn" href="{% url 'login' %}">
+            <i class="fa fa-fw fa-sign-in"></i>ログイン</a>
+    </li>
+    <li>
+        <a class="btn" href="{% url 'signup' %}">
+            <i class="fa fa-fw fa-user-plus"></i>新規登録</a>
+    </li>
+</center>
+
+
+
+{% endif %}
+
+
 {%endblock%}
