@@ -41,7 +41,6 @@ class Login(LoginView):
     form_class = LoginForm
     template_name = 'app/login.html'
 
-
 class Logout(LoginRequiredMixin, LogoutView):
     """ログアウトページ"""
     template_name = 'app/login.html'

@@ -1,50 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{title}}</title>
-</head>
-<body class="hold-transition login-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ログイン/Peek</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
     <div>
-        <a href="{% url 'index' %}">peek</a>
+      <a href="{% url 'index' %}">peek</a>
     </div>
-  <div class="login-box">
-    <div class="login-logo">
-      <b>{{title}}</b>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-      <p class="login-box-msg"><b>ログイン</b></p>
-
-      <form action="" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="form-group has-feedback">
-            {{ field }}
-          </div>
-        {% endfor %}
-        <div class="row">
-
-          {% for error in form.non_field_errors %}
-            <div class="alert alert-danger" role="alert">
-              <p>{{ error }}</p>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card text-bg-success">
+            <div class="card-header">
+              ログインフォーム
             </div>
-          {% endfor %}
-          <!-- /.col -->
-          <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">ログイン</button>
+            <div class="card-body">
+              <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                  </div>
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                  <p>{{ error }}</p>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">ログイン</button>
+              </form>
+            </div>
           </div>
-          <!-- /.col -->
+          <span><a href="{% url 'signup' %}" class="btn btn-primary mt-2">サインアップ</a> &#9756;登録がまだの方はこちら！</span>
         </div>
-      </form>
+      </div>
     </div>
-    <!-- /.login-box-body -->
-    <a href="{% url 'signup' %}">[ signup ]</a></span>
-  </div>
-  <!-- /.login-box -->
-
-</body>
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>
 
