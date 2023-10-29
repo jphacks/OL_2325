@@ -1,0 +1,52 @@
+.timeline {
+    list-style: none;
+}
+
+.timeline>li {
+    margin-bottom: 0px;
+}
+
+.icon img {
+    width: 90%; /* アイコンの幅を設定 */
+    height: 90%; /* アイコンの高さを設定（必要に応じて調整） */
+
+
+    border: 2px solid #000; /* 縁を追加（必要に応じて調整） */
+    max-width: 150px;
+    max-height: 150px;
+}
+
+
+/* for Desktop */
+@media (min-width : 640px) {
+    .timeline>li {
+        overflow: hidden;
+        margin-bottom: 10;
+        position: relative;
+    }
+
+    .timeline-date {
+        width: 110px;
+        float: left;
+        margin-top: 20px;
+    }
+
+    .timeline-content {
+        width: 75%;
+        float: left;
+        border-left: 10px rgb(213, 241, 225) solid;
+    padding: 0 0 30px 30px;
+    }
+
+    .timeline-content:before {
+        content: '';
+        width: 30px;
+        height: 30px;
+        background: rgb(161, 232, 219);
+        position: absolute;
+        left: 100px;
+        top: 20px;
+        border-radius: 100%;
+        border: 5px solid white;
+    }
+}
