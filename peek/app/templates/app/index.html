@@ -10,11 +10,9 @@
 {% if user.is_authenticated %}
 <li>  <a class="nav-link">ログイン中：{{ user.get_username }}</a></li>
 <li>
-    <a class="nav-link" href="">
         <a class="nav-link" href="{% url 'logout' %}">
         <i class="fa fa-fw fa-sign-out"></i>ログアウト</a>
 </li>
-{% endif %}
 {%for item in contents%}
 <hr>
 <p class="message_owner"><a href="{% url 'profile' item.author.id %}">{{item.author}}</a> さん</p>
@@ -27,4 +25,5 @@
 </span>
 <p class="message_score" style="color: red;">{{item.score}}</p>
 {%endfor%}
+{% endif %}
 {%endblock%}
