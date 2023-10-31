@@ -6,6 +6,12 @@
 {%endblock%}
 
 {%block content%}
+<div>
+    <button onclick="location.href='{% url 'post' %}'" class="btn-primary fixed-btn">
+        <i class="fa-solid fa-plus"></i>
+        <i class="fa-solid fa-camera"></i>
+    </button>
+</div>
 
 {% if user.is_authenticated %}
 <li>  <a class="nav-link">ログイン中：{{ user.get_username }}</a></li>
@@ -26,4 +32,5 @@
 <p class="message_score" style="color: red;">{{item.score}}</p>
 {%endfor%}
 {% endif %}
+
 {%endblock%}
