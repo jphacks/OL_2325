@@ -17,42 +17,102 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <a href="{% url 'index' %}"><img src="{% static 'img/Logo.png' %}" style="width: 200px; height: 100px;"></a>
-    </div>
-    <div class="body_content">
-    <div class="body_content_inner">
-        <table class="login_table" width="100%">
-            {% if user.is_authenticated %}
-            <tr><th width="150px">login user:</th>
-            <td><a href="{%url 'profile' user.id%}">{{login_user}}</a></td></tr>
-            {% endif %}
-        </table>
-        <div class="header">{%block header%}
-            {%endblock%}</div>
-        <div class="content">{%block content%}
-            {%endblock%}</div>
-        <div class="footer">
+    <div class="container">
+        <div class="row">
+            <a href="{% url 'index' %}"><img src="{% static 'img/Logo.png' %}" style="width: 200px; height: 100px;"></a>
+        </div>
         <hr>
-        <div>
-            {% if user.is_authenticated %}
-            <span style="float:left;font-weight:bold;">
-                <a href="{% url 'logout' %}" class="btn btn-primary">logout</a></span>
-            {% else %}
-            <span style="float:left;font-weight:bold;">
-                <a href="{% url 'login' %}" class="btn btn-primary">login</a></span>
-            <span style="float:left;font-weight:bold;">
-                <a href="{% url 'signup' %}" class="btn btn-primary">signup</a></span>
-            {% endif %}
+        <div class="row">
+            <div class="col-4">
+                <aside id="sub">
+                    <ul class="box">
+                        <ul class="nav nav-pills flex-column mb-auto" >
+                            <li class="nav-item mb-2">
+        
+                                <a href="{% url 'index' %}" class="nav-link link-body-emphasis d-flex justify-content-center align-items-center border">
+                                    <i class="fa-solid fa-house"></i>&emsp;
+                                    <div class="d-none d-md-block">ホーム</div>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#" class="nav-link link-body-emphasis d-flex justify-content-center align-items-center border">
+                                    <i class="fa-solid fa-heart"></i>&emsp;
+                                    <div class="d-none d-md-block">いいね</div>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#" class="nav-link link-body-emphasis d-flex justify-content-center align-items-center border">
+                                    <i class="fa-solid fa-bell"></i>&emsp;
+                                    <div class="d-none d-md-block">通知</div>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#" class="nav-link link-body-emphasis d-flex justify-content-center align-items-center border">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>&emsp;
+                                    <div class="d-none d-md-block">検索</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="icon_bottom">
+                            <div class="dropdown position-fixed bottom-0 start-0 mb-3 ms-3">
+                                <a href="#"
+                                    class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle mx-auto"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                        class="rounded-circle me-2">
+        
+                                    <div class="d-none d-md-block">名前1・名前2・名前3・名前4・名前5・名前6</div>
+                                </a>
+                                <ul class="dropdown-menu text-small shadow">
+                                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </aside>
+            </div>
             
-            <span style="float:right">
-                <a href="{% url 'post' %}" class="btn btn-primary">post</a>
-                peek
-            </span>
-        </div>
+            <div class="body_content col-8">
+            <div class="body_content_inner">
+                <table class="login_table" width="100%">
+                    {% if user.is_authenticated %}
+                    <tr><th width="150px">login user:</th>
+                    <td><a href="{%url 'profile' login_user.id%}">{{login_user}}</a></td></tr>
+                    {% endif %}
+                </table>
+                <div class="header">{%block header%}
+                    {%endblock%}</div>
+                <div class="content">{%block content%}
+                    {%endblock%}</div>
+                <div class="footer">
+                <hr>
+                <div>
+                    {% if user.is_authenticated %}
+                    <span style="float:left;font-weight:bold;">
+                        <a href="{% url 'logout' %}" class="btn btn-primary">logout</a></span>
+                    {% else %}
+                    <span style="float:left;font-weight:bold;">
+                        <a href="{% url 'login' %}" class="btn btn-primary">login</a></span>
+                    <span style="float:left;font-weight:bold;">
+                        <a href="{% url 'signup' %}" class="btn btn-primary">signup</a></span>
+                    {% endif %}
+                    
+                    <span style="float:right">
+                        <a href="{% url 'post' %}" class="btn btn-primary">post</a>
+                        peek
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+        
+    
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="general.js"></script>
 </body>
